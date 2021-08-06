@@ -1,0 +1,52 @@
+#contenido {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+}
+
+body {
+    background:url(Images/background.jpg) no-repeat center top;
+    background-size: cover;
+}
+
+input, option, select{
+    width: 200px;
+    text-align: center;
+}
+
+input, select {
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0, .3);
+    text-align: center  ;
+}
+
+#form {
+    background: white;
+    width: max-content;
+    margin-left: auto;
+    margin-right:auto;
+    border-radius: 5%;
+    padding: 5px;
+}
+
+#submit {
+    border: none;
+    outline: none;
+    height: 30px;
+    background: #2196f3;
+    color: white;
+    font-size: 18px;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+#logo {
+    border-radius: 50%;
+    height: 100;
+    width: 100px;
+}
+
+#encabezado {
+    margin-top: 50px;
+}
