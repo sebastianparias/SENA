@@ -1,3 +1,45 @@
+<?php
+
+session_start();
+
+/*if (isset($_SESSION['usuario'])) {
+    header('Location: consulta_citas.php');
+}*/
+
+//require 'conexion.php';
+
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'agroveterinaria';
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+//  echo "Connected successfully";
+
+if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
+    $usuario = $_POST['usuario'];
+    $contrasenia = $_POST['contrasenia'];
+    $sql = "SELECT id_empleado, usuario_empleado, contrasenia_empleado FROM empleados WHERE usuario_empleado = '$usuario' AND contrasenia_empleado = '$contrasenia'";
+    $results = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($results) > 0) {
+        $row = mysqli_fetch_assoc($results);
+        $_SESSION['usuario'] = $row['id_empleado'];
+        if($row['usuario_empleado'] == 'admin') {
+            header("Location: consulta_empleados.php");
+        } else {
+            header("Location: consulta_clientes.php");
+        }
+
+    }
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -43,10 +85,14 @@
         </div>
     </div>
 
+    <?php if (!empty($message)) : ?>
+        <p><?= $message ?></p>
+    <?php endif; ?>
+
     <div class="login_box">
         <img class="logo" src="Images/logo.jpg" alt="logo">
         <h1>Iniciar sesión</h1>
-        <form method="post" action="validacion.php">
+        <form action="login.php" method="post">
 
             <!-- USERNAME -->
             <label for="username">Usuario:</label>
@@ -60,7 +106,7 @@
             <p>En caso de olvidar su usuario o contraseña, contacte al administrador.</p>
 
         </form>
-        
+
     </div>
 
     <script src="main.js"></script>
